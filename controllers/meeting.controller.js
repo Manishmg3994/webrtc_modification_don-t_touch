@@ -45,3 +45,14 @@ exports.getAllMeetingUsers = (req, res, next) => {
         return res.status(200).send({ message: "Success", data: results });
     });
 }
+
+exports.deleteDataFromMongoDB = (req, res, next) => {
+    const { meetingId, hostId } = req.body;
+    meetingServices.deleteDataFromMongoDB(meetingId, hostId, (error, results) => {
+        if (error) {
+            return next(error);
+
+        }
+        return res.status(200).send({ message: "Success", data: results });
+    });
+}

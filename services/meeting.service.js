@@ -1,5 +1,6 @@
 const { meeting } = require("../models/meeting.model");
 const { meetingUser } = require("../models/meeting-user.model");
+const { response } = require("express");
 
 
 async function getAllMeetingUsers(meetId, callback) {
@@ -17,6 +18,18 @@ async function startMeeting(params, callback) {
     meetingSchema
         .save()
         .then((response) => {
+            return callback(null, response);
+        }).catch((error) => {
+            return callback(error);
+
+        });
+}
+
+
+async function deleteDataFromMongoDB(meetingId, hostId, callback) { //findByIdAndDelete
+    //TODO
+    await meeting.findOneAndDelete({ id: meetingId })
+        .then(async(response) => {
             return callback(null, response);
         }).catch((error) => {
             return callback(error);
@@ -99,5 +112,6 @@ module.exports = {
     checkMeetingExists, //changed name
     getUserBySocketId,
     updateMeetingUser,
-    getMeetingUser
+    getMeetingUser,
+    deleteDataFromMongoDB
 };

@@ -4,7 +4,9 @@ const router = express.Router();
 
 router.post("/meeting/start", meetingController.startMeeting);
 router.get("/meeting/join", meetingController.checkMeetingExists);
-router.get("/meeting/get", meetingController.getAllMeetingUsers); //optional
+router.get("/meeting/get", meetingController.getAllMeetingUsers);
+//optional
+router.post("/meeting/delete", meetingController.deleteDataFromMongoDB);
 
 
 
